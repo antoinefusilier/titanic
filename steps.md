@@ -103,6 +103,73 @@ Verification of project List
 - init `firebase init`
 - - select `firestore` and confirm
 
-## Firebase Service
+## Install of principals services
 
-- ./app-titanic/src/app : `ng g s Firebase`
+Into ./app-titanic/src/app :
+- FirebaseService: `ng g s services/Firebase`
+- AuthService: `ng g s services/auth`
+- GuardService: `ng g s services/guard`
+- AnalyseService: `ng g s services/analyse`
+## Install of admin module
+
+- admin: `ng g m admin`
+
+
+## Install of prinpals componants 
+
+- login : `ng g c login`
+- analyzes : `ng g c admin/analyzes`
+- result : `ng g c admin/result`
+- search : `ng g c admin/search`
+- menu : `ng g c admin/search/menu`
+
+
+## Install first Interfaces
+
+1. Delete/remplance into app.component.html by `<app-root></app-root>`
+2. Install bootstrap `npm i bootstrap`
+3. Import bootstrap styles into ./src/app/styles.scss `@import "~bootstrap/dist/css/bootstrap.min.css";`
+4. Import Javascript of Bootstrap into ./src/app/polyfills.ts `import 'bootstrap';`
+
+### Login Component
+1. Find a form login : https://getbootstrap.com/docs/5.2/forms/overview/
+
+## Get Datas
+
+>> FirebaseService
+
+### Principals Imports
+- 
+```typescript
+// Firebase APP
+import { initializeApp } from 'firebase/app';
+// Firebase Firestore
+import { getFirestore, collection, getDoc, setDoc, doc } from 'firebase/firestore';
+// Environment
+import { environment as env } from 'src/environments/environment';
+// Http request
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+```
+### Firebase & http Initialization
+
+```typescript
+// App initialisation
+export const app = initializeApp(env.firebase);
+// GET database Firestore
+export const db = getFirestore(app);
+
+// Initialisation of HTTP OPTIONS Service
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: 'my-auth-token'
+  })
+};
+```
+>> adding data url into environment
+
+```typescript
+,
+dataUrl: "https://raw.githubusercontent.com/hkacmaz/Titanic-Passenger-Survivors/master/train.csv",
+
+```
