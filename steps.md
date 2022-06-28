@@ -98,4 +98,6 @@ Connection to firebase (authentification)
 Verification of project List
 - `firebase projects:list`
 
+## Lancement du projet
 
+- init `firebase init`
