@@ -101,3 +101,4 @@ Verification of project List
 ## Lancement du projet
 
 - init `firebase init`
+- - select `firestore` and confirm
