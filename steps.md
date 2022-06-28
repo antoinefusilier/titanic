@@ -102,3 +102,7 @@ Verification of project List
 
 - init `firebase init`
 - - select `firestore` and confirm
+
+## Firebase Service
+
+- ./app-titanic/src/app : `ng g s Firebase`
