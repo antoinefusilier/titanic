@@ -23,7 +23,7 @@ in /firestore Database
 Add ***Email/Password*** and ***Google*** ACTIVE
 Add Provideur ***Google*** 
 - Project Public ID: project-284182339070
-- Assistance Email : antoinefuslier@gmail.com
+- Assistance Email : ***email***
 - Authorization List : Define later
 - SDK ... : Define later
 SAVE
@@ -91,14 +91,14 @@ Vérification of node version (must be higth to v14.18)
 
 Connection to firebase (authentification)
 - `firebase login ` and follow the authentification Link
-`Success! Logged in as `***antoinefusilier@gmail.com***
+`Success! Logged in as `***email***
 
 - ./app-titanic `sudo npm i firebase`
 
 Verification of project List
 - `firebase projects:list`
 
-## Lancement du projet
+## Start of the projet
 
 - init `firebase init`
 - - select `firestore` and confirm
