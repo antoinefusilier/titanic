@@ -19,10 +19,10 @@ export class DataService {
 
   getData(){
     return this.papa.parse(csvDataTrain, {
-      delimiter: ",",	// auto-detect
+      delimiter: "",	// auto-detect
       newline: "\r",	// auto-detect
-      quoteChar: '"',
-      escapeChar: '"',
+      // quoteChar: '"',
+      // escapeChar: '"',
       header: true,
       transformHeader: undefined,
       dynamicTyping: false,
