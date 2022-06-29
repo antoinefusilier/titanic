@@ -6,9 +6,9 @@ import { getFirestore, collection, getDoc, setDoc, doc } from 'firebase/firestor
 // Environment
 import { environment as env } from 'src/environments/environment';
 // Http request
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpParams, HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
-
+import { map, Observable } from 'rxjs';
 
 // App initialisation
 export const app = initializeApp(env.firebase);
@@ -16,12 +16,12 @@ export const app = initializeApp(env.firebase);
 export const db = getFirestore(app);
 
 // Initialisation of HTTP OPTIONS Service
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    Authorization: 'my-auth-token'
-  })
-};
+// const httpOptions = {
+//   headers: new HttpHeaders({
+//     'Content-Type': 'application/json',
+//     Authorization: 'my-auth-token'
+//   })
+// };
 
 @Injectable({
   providedIn: 'root'
@@ -29,12 +29,7 @@ const httpOptions = {
 
 export class FirebaseService {
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 
-  getTrainData(){
-    let data = this.http.get(`${env.dataUrl}`);
-    console.log(data);
-
-  }
 
 }

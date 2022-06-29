@@ -107,9 +107,11 @@ Verification of project List
 
 Into ./app-titanic/src/app :
 - FirebaseService: `ng g s services/Firebase`
+- DataService: `ng g s services/data`
 - AuthService: `ng g s services/auth`
 - GuardService: `ng g s services/guard`
 - AnalyseService: `ng g s services/analyse`
+
 ## Install of admin module
 
 - admin: `ng g m admin`
@@ -128,13 +130,17 @@ Into ./app-titanic/src/app :
 
 1. Delete/remplance into app.component.html by `<app-root></app-root>`
 2. Install bootstrap `npm i bootstrap`
-3. Import bootstrap styles into ./src/app/styles.scss `@import "~bootstrap/dist/css/bootstrap.min.css";`
+3. Import bootstrap styles into ./src/app/styles.scss `@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";`
 4. Import Javascript of Bootstrap into ./src/app/polyfills.ts `import 'bootstrap';`
 
 ### Login Component
 1. Find a form login : https://getbootstrap.com/docs/5.2/forms/overview/
 
 ## Get Datas
+1. Download CSV By Chrome Sources : F12 > Sources > train.csv > Save as 
+2. (optional) Download Extension Edit csv >> https://marketplace.visualstudio.com/items?itemName=janisdd.vscode-edit-csv
+3. Installation de PapaPase : `npm install ngx-papaparse@latest --save`
+4. Importer Papa dans DataService et tester papa parse
 
 >> FirebaseService
 
