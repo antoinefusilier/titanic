@@ -11,10 +11,10 @@ import { DataService } from './services/data.service';
 export class AppComponent {
   title = 'app-titanic';
 
-  constructor(private fS: FirebaseService, dS: DataService){
+  constructor(private fS: FirebaseService, private dS: DataService){
 
     // fS.pushDataToFB();
-
+    // this.dS.pureData();
   }
 
   callPushData(){
