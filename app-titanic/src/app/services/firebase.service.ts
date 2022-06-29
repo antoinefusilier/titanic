@@ -11,11 +11,13 @@ import { environment as env } from 'src/environments/environment';
 import { map, Observable } from 'rxjs';
 
 import { DataService } from './data.service';
+import { getAuth } from 'firebase/auth';
 
 // App initialisation
-export const app = initializeApp(env.firebase);
+const app = initializeApp(env.firebase);
 // GET database Firestore
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
 
 // Initialisation of HTTP OPTIONS Service
 // const httpOptions = {
@@ -30,7 +32,7 @@ export const db = getFirestore(app);
 })
 
 export class FirebaseService {
-
+  auth = getAuth(app);
   data: any;
   dataLength: number;
 
