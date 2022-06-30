@@ -36,8 +36,12 @@ export const docsGetted: Array<any> = [];
 export const docsConfirm = new Promise<any>((resolve, reject)=>{
   docsGetted.forEach((doc)=>{
     if(doc.exists()){
+      console.log("Promesse tenue documents trouves");
+
       resolve("Documents Getted");
     } else {
+      console.log("Pas de document promesse non tenue");
+
       reject("Documents Not Getted");
     }
   })
@@ -155,74 +159,14 @@ export class FirebaseService {
       // allDocs.push(getted_doc.data)
 
     }
-  }
-  // TEST but not possible because interdition of multiple sigle equation in a same field.
-  //
-  // async getDocsId(
-  //   fem_eq: any,
-  //   male_eq: any,
-  //   min_age: string,
-  //   max_age: string,
-  //   P1_eq: any,
-  //   P2_eq: any,
-  //   P3_eq: any,
-  // ) {
+    console.log('getDocsById: final',docsGetted);
+    docsConfirm.then(()=>{
+      console.log("Its confirmmmmmmmmmmm !!");
 
-  //   const q2 = query(trainRef,
-  //     where("Sex", fem_eq, " female"),
-  //     where("Sex", male_eq, " male"),
-  //     where("Age", ">", min_age),
-  //     where("Age", "<", max_age),
-  //     where("Pclass", P1_eq, " 1"),
-  //     where("Pclass", P2_eq, " 2"),
-  //     where("Pclass", P3_eq, " 3"),
+    }).catch(()=>{
+      console.log("Its not confirm ://!!");
 
-  //   );
-
-
-  //   const querySnapshot = await getDocs(q2);
-  //   querySnapshot.forEach((doct) => {
-  //     // doc.data() is never undefined for query doc snapshots
-  //     // console.log(doc.id, " => ", doc.data());
-
-  //     docsId.push(doct.id);
-  //   });
-  //   // Call to collect method
-  //   this.getDocsById();
-  // }
-
-  async collect(sex: string, ages: [min_age: number, max_age: number], classes: Array<number>){
-    // let search = query(collection(db, "train_passengers"),
-    //   where("Age", ">", ages[0]),
-    //   where("Age", "<", ages[1])
-
-
-    // );
-
-    // let q = query(collection(db, "train_passengers"), where('Age', "==",  "40"));
-    // console.log('Query: ',q);
-    // q =  q.converter
-    // let test = await getDocs(q);
-    // console.log('Test: ',test);
-    // test.forEach(element => {
-    //   console.log('Passenger Document Id : ',element.id);
-    // });
-    let querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc)=>
-      console.log(doc.id, "and data : ")
-    )
-    // where("Sex", "==", sex),
-    // let condi = query(search,where("Age", ">", ages[0]));
-    // condi = query(search, where("Age", "<", ages[1]));
-    // if(sex !== 'all'){
-      // condi = query(search, where("Sex", "==", sex));
-    // }
-    // if (classes[0]){
-      // for (let i = 0; i < classes.length; i++){
-        // condi = query(search, where("Pclass", "==", classes[i]));
-      // }
-    // }
-    // console.log('Recherche Collect: ',search);
+    });
   }
 
   async pushDataToFB(){
@@ -281,3 +225,38 @@ export class FirebaseService {
     }
   }
 }
+// TEST but not possible because interdition of multiple sigle equation in a same field.
+  //
+  // async getDocsId(
+  //   fem_eq: any,
+  //   male_eq: any,
+  //   min_age: string,
+  //   max_age: string,
+  //   P1_eq: any,
+  //   P2_eq: any,
+  //   P3_eq: any,
+  // ) {
+
+  //   const q2 = query(trainRef,
+  //     where("Sex", fem_eq, " female"),
+  //     where("Sex", male_eq, " male"),
+  //     where("Age", ">", min_age),
+  //     where("Age", "<", max_age),
+  //     where("Pclass", P1_eq, " 1"),
+  //     where("Pclass", P2_eq, " 2"),
+  //     where("Pclass", P3_eq, " 3"),
+
+  //   );
+
+
+  //   const querySnapshot = await getDocs(q2);
+  //   querySnapshot.forEach((doct) => {
+  //     // doc.data() is never undefined for query doc snapshots
+  //     // console.log(doc.id, " => ", doc.data());
+
+  //     docsId.push(doct.id);
+  //   });
+  //   // Call to collect method
+  //   this.getDocsById();
+  // }
+
