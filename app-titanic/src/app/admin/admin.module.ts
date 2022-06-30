@@ -4,6 +4,7 @@ import { AnalyzesComponent } from './analyzes/analyzes.component';
 import { ResultComponent } from './result/result.component';
 import { SearchComponent } from './search/search.component';
 import { MenuComponent } from './menu/menu.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { MenuComponent } from './menu/menu.component';
     MenuComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class AdminModule { }
