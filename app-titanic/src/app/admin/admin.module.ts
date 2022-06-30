@@ -4,7 +4,8 @@ import { AnalyzesComponent } from './analyzes/analyzes.component';
 import { ResultComponent } from './result/result.component';
 import { SearchComponent } from './search/search.component';
 import { MenuComponent } from './menu/menu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { AdminDirective } from './admin.directive';
 
 
 
@@ -13,10 +14,15 @@ import { FormsModule } from '@angular/forms';
     AnalyzesComponent,
     ResultComponent,
     SearchComponent,
-    MenuComponent
+    MenuComponent,
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  exports: [
+    AnalyzesComponent,
     FormsModule
   ]
 })

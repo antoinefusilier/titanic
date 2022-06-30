@@ -1,17 +1,56 @@
-<div class="container-fluid bg-dark">
-  <div class="container-md bg-light rounded-pill" style="--bs-bg-opacity: .5;">
-    <!-- <form (ngSubmit)="onSubmit(formAnalyze)" #formAnalyze="ngForm"> -->
-      <!-- <div class="col-md-4">
-        <label for="inputState" class="form-label">Classe</label>
-        <select id="inputState" class="form-select"name="name" [(ngModel)]="analyzeModel.Sex">
-          <option selected value="[1,2,3,4]"></option>
-          <option>...</option>
-        </select>
-      </div> -->
-      <!-- <button [disabled]="formAnalyze.invalid" type="submit" class="btn btn-primary m-3">Submit</button> -->
-    <!-- </form> -->
+<div class="container-fluid ">
+  <div class="container-md " style="--bs-bg-opacity: .5;">
+    <form (ngSubmit)="onSubmit(formAnalyze)" #formAnalyze="ngForm">
+      <div class="col-md-4">
+        <label for="">Selectionnez le sexe :</label><br>
+        <label for="female" class="form-label">Femmes</label>
+        <input type="checkbox" name="female" id="female" [(ngModel)]="analyzeModel.Sex.female">
+        <label for="male" class="form-label">Hommes</label>
+        <input type="checkbox" name="male" id="male" [(ngModel)]="analyzeModel.Sex.male">
 
-    <button type="button" class="btn btn-primary">Primary</button>
+      </div>
+      <div class="col-md-4">
+        <label for="ages" class="form-label">Age compris entre :</label>
+        <input
+        name="ages"
+        [(ngModel)]="analyzeModel.min_age" required type="number" class="form-control"
+        id="min_age"
+        placeholder="Age minimal"
+        >
+        <input
+        name="ages"
+        [(ngModel)]="analyzeModel.max_age"
+        required
+        type="number"
+        class="form-control"
+        id="max_age"
+        placeholder="Age maximal"
+
+        >
+      </div>
+      <div class="col-md-4">
+        <label for="">Classes des passagers</label><br>
+        <label for="P1">Première classe : </label>
+        <input type="checkbox" name="P1" id="P1"[(ngModel)]="analyzeModel.Class.c1" >
+        <label for="P2">Seconde classe : </label>
+        <input type="checkbox" name="P2" id="P2" [(ngModel)]="analyzeModel.Class.c2" >
+        <label for="P3">Troisième classe : </label>
+        <input type="checkbox" name="P3" id="P3" [(ngModel)]="analyzeModel.Class.c3" >
+      </div>
+
+      <button
+        *ngIf="analyzeModel.min_age < analyzeModel.max_age"
+      [disabled]="formAnalyze.invalid"
+       type="submit"
+       class="btn btn-primary m-3">Submit</button>
+    </form>
   </div>
 </div>
-{{ analyzeModel | json }}
+{{ 'Sex.female:' +analyzeModel.Sex.female }} <br>
+{{ 'Sex.male:' +analyzeModel.Sex.male }} <br>
+{{ 'min_age:' +analyzeModel.min_age}} <br>
+{{ 'max_age:' + analyzeModel.max_age }} <br>
+{{ 'C1:' + analyzeModel.Class.c1 }} <br>
+{{ 'C2:' + analyzeModel.Class.c2 }} <br>
+{{ 'C3:' + analyzeModel.Class.c3 }}
+

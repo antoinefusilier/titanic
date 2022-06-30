@@ -52,9 +52,29 @@ export class FirebaseService {
 
   }
 
+// https://firebase.google.com/docs/firestore/query-data/queries
+  async getDocsId(
+    fem_eq:any,
+    male_eq:any ,
+    min_age:string,
+    max_age:string,
+    P1_eq:any,
+    P2_eq: any,
+    P3_eq: any,
+    ){
 
-  async getDocsId(sex:string, min_age:string, max_age:string, Pclass:string){
-    const q2 = query(trainRef, where("Sex", "==", sex), where("Age", ">", min_age), where("Age", "<", max_age), where("Pclass", "==", Pclass));
+    const q2 = query(trainRef,
+      where("Sex", fem_eq, " female"),
+      where("Sex", male_eq, " male"),
+      where("Age", ">", min_age),
+      where("Age", "<", max_age),
+      where("Pclass", P1_eq, " 1"),
+      where("Pclass", P2_eq, " 2"),
+      where("Pclass", P3_eq, " 3"),
+
+      );
+
+
     const querySnapshot = await getDocs(q2);
     querySnapshot.forEach((doct) => {
       // doc.data() is never undefined for query doc snapshots
