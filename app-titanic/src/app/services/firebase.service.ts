@@ -33,6 +33,16 @@ const q = query(trainRef, where("Age", ">", " 10"));
 
 export const docsId: Array<any> = [];
 export const docsGetted: Array<any> = [];
+export const docsConfirm = new Promise<any>((resolve, reject)=>{
+  docsGetted.forEach((doc)=>{
+    if(doc.exists()){
+      resolve("Documents Getted");
+    } else {
+      reject("Documents Not Getted");
+    }
+  })
+})
+
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +55,9 @@ export class FirebaseService {
   all_age: []  = [];
 
   constructor(private dS: DataService) {
+    // Resetting docsId
+    docsId.length = 0;
+
     this.data = dS.getData();
     // console.log(this.data.data[1])
     this.dataLength = this.data.data.length;
@@ -54,43 +67,76 @@ export class FirebaseService {
 
 // https://firebase.google.com/docs/firestore/query-data/queries
   async getDocsId(
-    fem_eq:any,
-    male_eq:any ,
-    min_age:string,
-    max_age:string,
-    P1_eq:any,
-    P2_eq: any,
-    P3_eq: any,
+    sex: string,
+    min_age: string,
+    max_age: string,
+    Pclass: string,
+    searchType: string
     ){
+    console.log("Lancement de getDocsId");
+    console.log(searchType);
 
-    const q2 = query(trainRef,
-      where("Sex", fem_eq, " female"),
-      where("Sex", male_eq, " male"),
+    const sex_Age_C = query(trainRef,
+      where("Sex", "==", sex),
       where("Age", ">", min_age),
       where("Age", "<", max_age),
-      where("Pclass", P1_eq, " 1"),
-      where("Pclass", P2_eq, " 2"),
-      where("Pclass", P3_eq, " 3"),
+      where("Pclass", "==", Pclass)
+    );
+    const Age_C = query(trainRef,
+      where("Age", ">", min_age),
+      where("Age", "<", max_age),
+      where("Pclass", "==", Pclass)
+    );
+    const sex_Age = query(trainRef,
+      where("Sex", "==", sex),
+      where("Age", ">", min_age),
+      where("Age", "<", max_age),
+    );
+    const Age = query(trainRef,
+      where("Age", ">", " " + min_age),
+      where("Age", "<", " " + max_age),
+    );
 
-      );
+    // Conditions
+    if (searchType == "SAC") {
+      // get With specified sex, age and class
+      const gSex_age_c = await getDocs(sex_Age_C);
+      this.callPush(gSex_age_c);
+    }
+    if (searchType == "AC") {
+      // get With all sexes specified age and class
+      const gAge_c = await getDocs(Age_C);
+      this.callPush(gAge_c);
+    }
+    if (searchType == "SA") {
+      // get With all classes specified sex and age
+      const gSex_age = await getDocs(sex_Age);
+      this.callPush(gSex_age);
+    }
+    if(searchType == "A"){
+      console.log("Condition A accepted");
+      // get With all sex, all classes, and specified age
+      const docs = await getDocs(Age);
+      this.callPush(docs);
+    }
 
-
-    const querySnapshot = await getDocs(q2);
-    querySnapshot.forEach((doct) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-
-      docsId.push(doct.id);
-    });
     // Call to collect method
     this.getDocsById();
+  }
+  callPush(docs:any) {
+    console.log('callPushaccepted');
+
+    docs.forEach((doct:any) => {
+      docsId.push(doct.id);
+    });
+
   }
   // Docs collect method
   async getDocsById(){
 
     for(let i = 0; i<docsId.length; i++){
       var docu = doc(db, "train_passengers", docsId[i]);
-      console.log(docsId[i]);
+      // console.log(docsId[i]);
 
       var getted_doc = await getDoc(docu);
 
@@ -110,8 +156,40 @@ export class FirebaseService {
 
     }
   }
+  // TEST but not possible because interdition of multiple sigle equation in a same field.
+  //
+  // async getDocsId(
+  //   fem_eq: any,
+  //   male_eq: any,
+  //   min_age: string,
+  //   max_age: string,
+  //   P1_eq: any,
+  //   P2_eq: any,
+  //   P3_eq: any,
+  // ) {
+
+  //   const q2 = query(trainRef,
+  //     where("Sex", fem_eq, " female"),
+  //     where("Sex", male_eq, " male"),
+  //     where("Age", ">", min_age),
+  //     where("Age", "<", max_age),
+  //     where("Pclass", P1_eq, " 1"),
+  //     where("Pclass", P2_eq, " 2"),
+  //     where("Pclass", P3_eq, " 3"),
+
+  //   );
 
 
+  //   const querySnapshot = await getDocs(q2);
+  //   querySnapshot.forEach((doct) => {
+  //     // doc.data() is never undefined for query doc snapshots
+  //     // console.log(doc.id, " => ", doc.data());
+
+  //     docsId.push(doct.id);
+  //   });
+  //   // Call to collect method
+  //   this.getDocsById();
+  // }
 
   async collect(sex: string, ages: [min_age: number, max_age: number], classes: Array<number>){
     // let search = query(collection(db, "train_passengers"),

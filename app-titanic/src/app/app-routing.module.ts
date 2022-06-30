@@ -24,19 +24,9 @@ const routes: Routes = [
     canActivate: [UserGuard]
   },
   {
-    path: 'admin/menu',
-    component: MenuComponent,
-    canActivate: [UserGuard]
-  },
-  {
-    path: 'admin/result',
-    component: ResultComponent,
-    canActivate: [UserGuard]
-  },
-  {
     path: 'admin/search',
     component: SearchComponent,
-    canActivate: [UserGuard]
+    // canActivate: [UserGuard]
   },
 ];
 

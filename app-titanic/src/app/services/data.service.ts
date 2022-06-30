@@ -32,7 +32,7 @@ export class DataService {
       comments: false,
       step: undefined,
       complete: (result) => {
-        console.log('Parsed: ', result.data);
+        // console.log('Parsed: ', result.data);
       },
       error: undefined,
       download: false,
