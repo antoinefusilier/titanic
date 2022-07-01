@@ -26,7 +26,7 @@ const routes: Routes = [
   {
     path: 'admin/search',
     component: SearchComponent,
-    // canActivate: [UserGuard]
+    canActivate: [UserGuard]
   },
 ];
 

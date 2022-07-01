@@ -18,6 +18,8 @@ export class ResultComponent implements OnInit {
   sur: number = 1;
 
   not_sur: number = 3;
+
+
   chart = {
     title: "Result",
     type: ChartType.PieChart,
