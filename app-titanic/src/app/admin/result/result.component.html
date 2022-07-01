@@ -20,8 +20,12 @@
 </div>
 <!-- https://fr.quish.tv/create-pie-chart-angular-12-using-ng2-charts -->
 <div class="container-sm">
-  <div class="chart-wrapper">
-    <canvas id="pie" class="chart chart-pie" chart-data="chart-data" chart-labels="labels" legend="true">
-    </canvas>
-  </div>
+<google-chart [title]="chart.title" [type]="chart.type" [data]="chart.data" [columns]="chart.columnsNames"
+  [options]="chart.options">
+</google-chart>
 </div>
+<body>
+  <!--Div that will hold the pie chart-->
+  <div id="chart_div" style="width:400; height:300"></div>
+</body>
+

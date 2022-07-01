@@ -40,6 +40,9 @@ export const docsConfirm = new Promise<any>((resolve, reject) => {
     reject("No document find")
   }
 })
+export const survived: Array<any> = [];
+export const not_survived: Array<any> = [];
+
 
 @Injectable({
   providedIn: 'root'
@@ -160,6 +163,7 @@ export class FirebaseService {
       console.log("Its not confirm ://!!");
 
     });
+    this.static()
   }
 
   async pushDataToFB(){
@@ -216,6 +220,20 @@ export class FirebaseService {
 
       }
     }
+  }
+  static() {
+    for (let i = 0; i < docsGetted.length; i++) {
+      if (docsGetted[i].Survived == " 1") {
+        survived.push(docsGetted[i])
+
+      }
+      if (docsGetted[i].Survived == " 0") {
+        not_survived.push(docsGetted[i])
+      }
+    }
+    console.log('const survived statistic',survived);
+    console.log('const survived statistic',not_survived);
+
   }
 }
 // TEST but not possible because interdition of multiple sigle equation in a same field.

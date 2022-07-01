@@ -1,35 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { docsGetted } from 'src/app/services/firebase.service';
-import { ChartType, ChartOptions } from '../../../../node_modules/chart.js';
-// Angu 11 : Not fonctional but good ressource
-// https://www.zentica-global.com/fr/zentica-blog/voir/tutoriel-angular-11-chart-js-avec-des-exemples-de-ng2-charts-6073abf9da42c
+import { docsGetted, survived, not_survived } from 'src/app/services/firebase.service';
+import { GoogleChartsModule, ChartType } from 'angular-google-charts';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
 })
+// @ViewChild('monElementHTML') monElement: ElementRef;
 export class ResultComponent implements OnInit {
 
   passengers: Array<any> = [];
+  // https://github.com/FERNman/angular-google-charts
+  // sur: number = survived.length;
+  sur: number = 1;
 
-  $scope.chartLabels = ['List A', 'List B', 'List C'];
-  $scope.chart-data =[55, 69, 10];
-  chart - click="onClickdisplay"
-  $scope.onClickdisplay = function (points, evt) {
-    console.log(points);
-  };
-  constructor(private router: Router) {
+  not_sur: number = 3;
+  chart = {
+    title: "Result",
+    type: ChartType.PieChart,
+    data: [['On suvécus', this.sur], ['Non pas survécus', this.not_sur]],
+    columnsNames: ["Survived", "Not survived"],
+    options: {
+      colors: ['#e0440e', '#e6693e', '#ec8f6e'],
+      is3D: true
+    }
+  }
+
+  // [title] = "chart.title"[type] = "chart.type"[data] = "chart.data"[columns] = "chart.columnNames"
+  // [options] = "chart.options"
+  constructor(private router: Router,
+    private renderer: Renderer2) {
     this.passengers = docsGetted;
-    console.log(this.passengers)
-
-    monkeyPatchChartJsTooltip();
-    monkeyPatchChartJsLegend();
+    console.log("result: this.passengers: ",this.passengers);
+    console.log('constructor result not s:',not_survived);
    }
 
   ngOnInit(): void {
+    this.loading();
+    this.sur = survived.length;
+    this.not_sur = not_survived.length;
+
   }
+  async loading(){
+    this.sur = survived.length;
+    this.not_sur = not_survived.length;
+  }
+
 
   backAnalyze(){
 
