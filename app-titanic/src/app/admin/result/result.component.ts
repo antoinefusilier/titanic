@@ -15,8 +15,9 @@ export class ResultComponent implements OnInit {
   passengers: Array<any> = [];
   // https://github.com/FERNman/angular-google-charts
   // sur: number = survived.length;
+  // Default value debugging into firebase service constante of survived and not_survived
+  // Can't refresh HTML before variables :/
   sur: number = 1;
-
   not_sur: number = 3;
 
 

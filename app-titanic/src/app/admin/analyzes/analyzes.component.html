@@ -10,12 +10,12 @@
 
       </div>
       <div class="col-md-4">
-        <label for="ages" class="form-label">Age compris entre :</label>
+        <label for="ages" class="form-label">Age compris entre  :</label>
         <input
         name="ages"
         [(ngModel)]="analyzeModel.min_age" required type="number" class="form-control"
         id="min_age"
-        placeholder="Age minimal"
+        placeholder="Age minimal (minimun 20)"
         >
         <input
         name="ages"
@@ -24,7 +24,7 @@
         type="number"
         class="form-control"
         id="max_age"
-        placeholder="Age maximal"
+        placeholder="Age maximal (> minimal)"
 
         >
       </div>
