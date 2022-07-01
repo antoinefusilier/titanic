@@ -1,1 +1,27 @@
-<p>result works!</p>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
+  <script src="/angular/angular.min.js"></script>
+  <script src="/Chart.js/Chart.min.js"></script>
+  <script src="/angular-chart.js/dist/angular-chart.min.js"></script>
+  <link rel="stylesheet" href="/angular-chart.js/dist/angular-chart.css">
+</head>
+<div class="container-md">
+  <!-- https://guide-angular.wishtack.io/angular/composants/ngfor -->
+  <ol class="list-group list-group-numbered">
+    <li *ngFor="let passenger of passengers " class="list-group-item d-flex justify-content-between align-items-start">
+      <div class="ms-2 me-auto">
+        <div class="fw-bold">{{passenger.Name}}</div>
+        {{passenger.Sex}}
+      </div>
+      <span class="badge bg-primary rounded-pill"> Age: {{passenger.Age}}</span>
+    </li>
+  </ol>
+  <button class="btn btn-sm btn-outline-secondary" type="button" (click)="backAnalyze()">Reset</button>
+</div>
+<!-- https://fr.quish.tv/create-pie-chart-angular-12-using-ng2-charts -->
+<div class="container-sm">
+  <div class="chart-wrapper">
+    <canvas id="pie" class="chart chart-pie" chart-data="chart-data" chart-labels="labels" legend="true">
+    </canvas>
+  </div>
+</div>

@@ -33,8 +33,13 @@ const q = query(trainRef, where("Age", ">", " 10"));
 
 export const docsId: Array<any> = [];
 export const docsGetted: Array<any> = [];
-
-
+export const docsConfirm = new Promise<any>((resolve, reject) => {
+  if (docsGetted[0] !== null || docsGetted.length < 0) {
+    resolve("Document")
+  } else {
+    reject("No document find")
+  }
+})
 
 @Injectable({
   providedIn: 'root'
@@ -122,23 +127,6 @@ export class FirebaseService {
       docsId.push(doct.id);
     });
 
-  }
-  async docConfirm(): Promise<any>{
-    const docsConfirm = new Promise<any>((resolve, reject) => {
-      docsGetted.forEach((doc) => {
-        // const getted_doc = await getDoc(doc);
-// [ICI - ARRET 17h 30.06]
-        // if (getted_doc.exists()) {
-        //   console.log("Promesse tenue documents trouves");
-
-        //   resolve("Documents Getted");
-        // } else {
-        //   console.log("Pas de document promesse non tenue");
-
-        //   reject("Documents Not Getted");
-        // }
-      })
-    })
   }
   // Docs collect method
   async getDocsById(){

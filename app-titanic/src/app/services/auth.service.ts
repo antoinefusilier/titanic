@@ -50,6 +50,7 @@ export class AuthService {
           } else {
             // User is signed out
             // ...
+            localStorage.setItem('connected', 'false');
 
             return false;
           }
