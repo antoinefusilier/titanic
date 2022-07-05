@@ -42,11 +42,14 @@ export class AnalyzesComponent implements OnInit {
 
   onSubmit(form: NgForm){
     this.check()
+    console.log('SUBM Sex',this.request.sex);
+    console.log('SUBM Class', this.request.Pclass);
+    console.log('SUBM search', this.request.searchT);
 
     this.fS.getDocsId(
       this.request.sex,
-      this.analyzeModel.min_age,
-      this.analyzeModel.max_age,
+      this.request.min_age,
+      this.request.max_age,
       this.request.Pclass,
       this.request.searchT
     )

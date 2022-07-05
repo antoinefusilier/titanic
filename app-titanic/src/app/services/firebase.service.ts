@@ -75,22 +75,23 @@ export class FirebaseService {
     ){
     console.log("Lancement de getDocsId");
     console.log(searchType);
-
+    // >> SAC
     const sex_Age_C = query(trainRef,
       where("Sex", "==", sex),
-      where("Age", ">", min_age),
-      where("Age", "<", max_age),
+      where("Age", ">", " " + min_age),
+      where("Age", "<", " " + max_age),
       where("Pclass", "==", Pclass)
     );
     const Age_C = query(trainRef,
-      where("Age", ">", min_age),
-      where("Age", "<", max_age),
+      where("Age", ">", " " + min_age),
+      where("Age", "<", " " + max_age),
       where("Pclass", "==", Pclass)
     );
+    // >> SA
     const sex_Age = query(trainRef,
       where("Sex", "==", sex),
-      where("Age", ">", min_age),
-      where("Age", "<", max_age),
+      where("Age", ">", " " + min_age),
+      where("Age", "<", " " + max_age),
     );
     const Age = query(trainRef,
       where("Age", ">", " " + min_age),
@@ -102,22 +103,30 @@ export class FirebaseService {
       // get With specified sex, age and class
       const gSex_age_c = await getDocs(sex_Age_C);
       this.callPush(gSex_age_c);
+      console.log('SEARCH TYPE = SAC');
+
     }
     if (searchType == "AC") {
       // get With all sexes specified age and class
       const gAge_c = await getDocs(Age_C);
       this.callPush(gAge_c);
+      console.log('SEARCH TYPE = AC');
+
     }
     if (searchType == "SA") {
       // get With all classes specified sex and age
       const gSex_age = await getDocs(sex_Age);
       this.callPush(gSex_age);
+      console.log('SEARCH TYPE = SA');
+
     }
     if(searchType == "A"){
       console.log("Condition A accepted");
       // get With all sex, all classes, and specified age
       const docs = await getDocs(Age);
       this.callPush(docs);
+      console.log('SEARCH TYPE = A');
+
     }
 
     // Call to collect method
@@ -125,13 +134,15 @@ export class FirebaseService {
   }
   callPush(docs:any) {
     console.log('callPushaccepted');
-
+    // docsId.length = 0;
     docs.forEach((doct:any) => {
       docsId.push(doct.id);
     });
 
   }
   // Docs collect method
+  // https://stackoverflow.com/questions/9298839/is-it-possible-to-stop-javascript-execution
+
   async getDocsById(){
 
     for(let i = 0; i<docsId.length; i++){

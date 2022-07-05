@@ -6,6 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AdminModule } from './admin/admin.module';
+// import { MarkdownModule } from 'ngx-markdown';
+// import { HttpClient, HttpClientModule } from '@angular/common/http';
+// import { SecurityContext } from '@angular/core';
+
+// MarkdownModule.forRoot({
+//   sanitize: SecurityContext.NONE
+// })
 
 @NgModule({
   declarations: [
@@ -16,9 +23,12 @@ import { AdminModule } from './admin/admin.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AdminModule
+    AdminModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+
+  ],
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
