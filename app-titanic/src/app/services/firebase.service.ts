@@ -74,7 +74,7 @@ export class FirebaseService {
     searchType: string
     ){
     console.log("Lancement de getDocsId");
-    console.log(searchType);
+    console.log(Pclass);
     // >> SAC
     const sex_Age_C = query(trainRef,
       where("Sex", "==", sex),

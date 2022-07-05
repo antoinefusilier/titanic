@@ -87,13 +87,19 @@ export class AnalyzesComponent implements OnInit {
       this.request.sex = " male";
     }
 // To finish
-    if(this.analyzeModel.Class.c1 === true){
+    if(this.analyzeModel.Class.c1 === true
+      && this.analyzeModel.Class.c2 !== true
+      && this.analyzeModel.Class.c3 !== true){
       this.request.Pclass = " 1";
     }
-    if (this.analyzeModel.Class.c2 === true) {
+    if (this.analyzeModel.Class.c2 === true
+      && this.analyzeModel.Class.c1 !== true
+      && this.analyzeModel.Class.c3 !== true) {
       this.request.Pclass = " 2";
     }
-    if (this.analyzeModel.Class.c3 === true) {
+    if (this.analyzeModel.Class.c3 === true
+      && this.analyzeModel.Class.c2 !== true
+      && this.analyzeModel.Class.c1 !== true) {
       this.request.Pclass = " 3";
     }
 
@@ -112,8 +118,8 @@ export class AnalyzesComponent implements OnInit {
       this.request.searchT = 'SAC';
     }
 
-    if ((this.analyzeModel.Sex.female !== true
-      && this.analyzeModel.Sex.male !== true)
+    if ((this.analyzeModel.Sex.female === true
+      && this.analyzeModel.Sex.male === true)
 
       && (this.analyzeModel.Class.c1 === true
         || this.analyzeModel.Class.c2 === true
@@ -136,8 +142,8 @@ export class AnalyzesComponent implements OnInit {
       && this.analyzeModel.Sex.male === true)
 
       && (this.analyzeModel.Class.c1 === true
-        || this.analyzeModel.Class.c2 === true
-        || this.analyzeModel.Class.c3 === true
+        && this.analyzeModel.Class.c2 === true
+        && this.analyzeModel.Class.c3 === true
       )
     ) {
       this.request.searchT = 'A';
