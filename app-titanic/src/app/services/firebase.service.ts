@@ -29,7 +29,7 @@ const db = getFirestore(app);
 // };
 const trainRef = collection(db, "train_passengers");
 
-const q = query(trainRef, where("Age", ">", " 10"));
+// const q = query(trainRef, where("Age", ">", " 10"));
 
 export const docsId: Array<any> = [];
 export const docsGetted: Array<any> = [];
@@ -75,6 +75,11 @@ export class FirebaseService {
     ){
     console.log("Lancement de getDocsId");
     console.log(Pclass);
+    for(let i = 0; i < docsGetted.length; i++){
+      docsGetted.splice(i, 10);
+    }
+    console.log('RESETED DOCS CONST !!!:',docsGetted);
+
     // >> SAC
     const sex_Age_C = query(trainRef,
       where("Sex", "==", sex),

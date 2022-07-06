@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { ActivatedRoute, Router } from '@angular/router';
-import { Analyze } from 'src/app/analyze';
-import { FirebaseService, docsGetted, docsId, docsConfirm } from 'src/app/services/firebase.service';
+import { Analyze } from '../../analyze';
+import { FirebaseService, docsGetted, docsId, docsConfirm } from '../../services/firebase.service';
 
 // Issues :
 //  Of exportAs child-dir directive
@@ -28,7 +28,7 @@ export class AnalyzesComponent implements OnInit {
     searchT: ''
   }
 
-  analyzeModel: Analyze = new Analyze({ female: true, male: true }, '', '', { c1: true, c2:true ,c3: true })
+  analyzeModel: Analyze = new Analyze({ female: true, male: true }, '10', '', { c1: true, c2:true ,c3: true })
   // classes: any = ()
   constructor(private fS: FirebaseService, private router: Router) {
     // this.fS.getDocsId(" female", " 10", " 40", " 1");

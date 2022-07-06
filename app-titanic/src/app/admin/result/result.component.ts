@@ -36,12 +36,16 @@ export class ResultComponent implements OnInit {
   // [options] = "chart.options"
   constructor(private router: Router,
     private renderer: Renderer2) {
-    this.passengers = docsGetted;
+
     console.log("result: this.passengers: ",this.passengers);
     console.log('constructor result not s:',not_survived);
    }
 
   ngOnInit(): void {
+    this.passengers = [];
+    this.passengers = docsGetted;
+    console.log('Pushing to passengers : (docsGetted)',docsGetted);
+
     this.loading();
     this.sur = survived.length;
     this.not_sur = not_survived.length;

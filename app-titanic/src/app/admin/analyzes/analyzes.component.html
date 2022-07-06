@@ -10,47 +10,40 @@
 
       </div>
       <div class="col-md-4">
-        <label for="ages" class="form-label">Age compris entre  :</label>
-        <input
-        name="ages"
-        [(ngModel)]="analyzeModel.min_age" required type="number" class="form-control"
-        id="min_age"
-        placeholder="Age minimal (minimun 20)"
-        >
-        <input
-        name="ages"
-        [(ngModel)]="analyzeModel.max_age"
-        required
-        type="number"
-        class="form-control"
-        id="max_age"
-        placeholder="Age maximal (> minimal)"
+        <p>Age compris entre :</p>
 
-        >
+        <!-- <input type="range" class="form-range" id="customRange1"> -->
+        <div>
+          <input min="10" max="97" value="19" orient="minlength" name="ages" [(ngModel)]="analyzeModel.min_age" required
+            type="range" class="form-range" id="min_age" placeholder="Age minimal (minimun 20)">
+          <label for="ages" class="form-label">{{analyzeModel.min_age}}</label>
+        </div>
+        <p>Et :</p>
+        <div>
+          <input min="{{analyzeModel.min_age}}" max="97" value="19" orient="minlength" name="ages" [(ngModel)]="analyzeModel.max_age" required
+            type="range" class="form-range" id="min_age" placeholder="Age minimal (minimun 20)">
+          <label for="ages" class="form-label">{{analyzeModel.max_age}}</label>
+        </div>
       </div>
       <div class="col-md-4">
         <label for="">Classes des passagers</label><br>
         <label for="P1">Première classe : </label>
-        <input type="checkbox" name="P1" id="P1"[(ngModel)]="analyzeModel.Class.c1" >
+        <input type="checkbox" name="P1" id="P1" [(ngModel)]="analyzeModel.Class.c1">
         <label for="P2">Seconde classe : </label>
-        <input type="checkbox" name="P2" id="P2" [(ngModel)]="analyzeModel.Class.c2" >
+        <input type="checkbox" name="P2" id="P2" [(ngModel)]="analyzeModel.Class.c2">
         <label for="P3">Troisième classe : </label>
-        <input type="checkbox" name="P3" id="P3" [(ngModel)]="analyzeModel.Class.c3" >
+        <input type="checkbox" name="P3" id="P3" [(ngModel)]="analyzeModel.Class.c3">
       </div>
 
-      <button
-        *ngIf="analyzeModel.min_age < analyzeModel.max_age"
-      [disabled]="formAnalyze.invalid"
-       type="submit"
-       class="btn btn-primary m-3">Submit</button>
+      <button *ngIf="analyzeModel.min_age < analyzeModel.max_age" [disabled]="formAnalyze.invalid" type="submit"
+        class="btn btn-primary m-3">Submit</button>
     </form>
   </div>
 </div>
-{{ 'Sex.female:' +analyzeModel.Sex.female }} <br>
+<!-- {{ 'Sex.female:' +analyzeModel.Sex.female }} <br>
 {{ 'Sex.male:' +analyzeModel.Sex.male }} <br>
 {{ 'min_age:' +analyzeModel.min_age}} <br>
 {{ 'max_age:' + analyzeModel.max_age }} <br>
 {{ 'C1:' + analyzeModel.Class.c1 }} <br>
 {{ 'C2:' + analyzeModel.Class.c2 }} <br>
-{{ 'C3:' + analyzeModel.Class.c3 }}
-
+{{ 'C3:' + analyzeModel.Class.c3 }} -->
