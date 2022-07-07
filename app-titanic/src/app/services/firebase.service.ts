@@ -13,6 +13,9 @@ import { map, Observable } from 'rxjs';
 import { DataService } from './data.service';
 import { getAuth } from 'firebase/auth';
 import { ReturnStatement } from '@angular/compiler';
+// INTERFACES #########################33
+import { db_update } from '../interfaces/firebase';
+
 
 // App initialisation
 const app = initializeApp(env.firebase);
@@ -50,7 +53,7 @@ export const not_survived: Array<any> = [];
 
 export class FirebaseService {
   auth = getAuth(app);
-  data: any;
+  data: any = {};
   dataLength: number;
   all_age: []  = [];
 
@@ -193,6 +196,9 @@ export class FirebaseService {
     })
     return all_p_arr;
   }
+  // DATABASE #############################################
+  // COMPONENTS
+
   async pushDataPassenger(i:any){
     await setDoc(doc(db, "train_passengers", this.dS.generateDocId(20)), {
       id: this.data.data[i].PassengerId,
@@ -215,27 +221,25 @@ export class FirebaseService {
     // this.dataLength
 
     // Instanciation of retourned Data
-    let datas_returned:any = {
-      pushed: [],
-      not_pushed: [],
-      error: '',
-    }
+    let datas_returned: db_update;
     // Getting all passenger in Database Firestore
     let DB_passenger = this.getPassengersInDB();
     DB_passenger.then((element)=>{
+      if (element){
+        for (let y = 0; y < 10; y++) {
 
-      for(let y = 0; y < 10; y++){
+          const occurence = element.find((elt: any) => elt.id == this.data.data[y].PassengerId);
+          console.log(occurence);
 
-        const occurence = element.find((elt: any) => elt.id == this.data.data[y].PassengerId);
-        console.log(occurence);
+          if (!occurence) {
+            datas_returned.pushed.push(this.data.data[y]);
+            // this.pushDataPassenger(y);
+          } else {
+            datas_returned.not_pushed.push(this.data.data[y]);
 
-        if (!occurence){
-          datas_returned.pushed.push(this.data.data[y]);
-          this.pushDataPassenger(y);
-        } else {
-          datas_returned.not_pushed.push(this.data.data[y]);
-
+          }
         }
+
       }
 
     })
