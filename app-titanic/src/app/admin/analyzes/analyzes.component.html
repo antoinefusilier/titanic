@@ -1,7 +1,7 @@
-<div class="container-fluid ">
-  <div class="container-md " style="--bs-bg-opacity: .5;">
-    <form (ngSubmit)="onSubmit(formAnalyze)" #formAnalyze="ngForm">
-      <div class="col-md-4">
+<!-- <div class="container-fluid mt-5  container-sm ">
+  <div class="m-5 bg-primary" > -->
+    <form (ngSubmit)="onSubmit(formAnalyze)" #formAnalyze="ngForm" class="rounded-3 bg-secondary opacity-75 position-fixed bg-primary top-50 start-50 translate-middle">
+      <div class="m-auto">
         <label for="">Selectionnez le sexe :</label><br>
         <label for="female" class="form-label">Femmes</label>
         <input type="checkbox" name="female" id="female" [(ngModel)]="analyzeModel.Sex.female">
@@ -38,8 +38,8 @@
       <button *ngIf="analyzeModel.min_age < analyzeModel.max_age" [disabled]="formAnalyze.invalid" type="submit"
         class="btn btn-primary m-3">Submit</button>
     </form>
-  </div>
-</div>
+  <!-- </div>
+</div> -->
 <!-- {{ 'Sex.female:' +analyzeModel.Sex.female }} <br>
 {{ 'Sex.male:' +analyzeModel.Sex.male }} <br>
 {{ 'min_age:' +analyzeModel.min_age}} <br>

@@ -181,61 +181,72 @@ export class FirebaseService {
     });
     this.static()
   }
+  async getOneDoc(doc:any){
+    const getted = await getDoc(doc);
+    return getted.data();
+  }
+  async getPassengersInDB(){
+    let all_p_arr: any = [];
+    const all_p = await getDocs(query(collection(db, "train_passengers")));
+    all_p.forEach((p)=>{
+      all_p_arr.push(p.data());
+    })
+    return all_p_arr;
+  }
+  async pushDataPassenger(i:any){
+    await setDoc(doc(db, "train_passengers", this.dS.generateDocId(20)), {
+      id: this.data.data[i].PassengerId,
+      Survived: this.data.data[i].Survived,
+      Pclass: this.data.data[i].Pclass,
+      FirstName: this.data.data[i].FirstName,
+      Name: this.data.data[i].Name,
+      Sex: this.data.data[i].Sex,
+      Age: this.data.data[i].Age,
+      SibSp: this.data.data[i].SibSp,
+      Parch: this.data.data[i].Parch,
+      Ticket: this.data.data[i].Ticket,
+      Fare: this.data.data[i].Fare,
+      Cabin: this.data.data[i].Cabin,
+      Embarked: this.data.data[i].Embarked
+    });
+  }
 
   async pushDataToFB(){
     // this.dataLength
 
-    for (let i = 0; i < this.dataLength ; i++){
-      let this_doc = query(collection(db, "train_passengers"), where("PassengerId", "==", " "+i));
-
-      let doc_exist = false;
-
-      let docsSnap = await getDocs(this_doc);
-      docsSnap.forEach((doc) => {
-        if(doc.ref){
-          doc_exist = true;
-        }
-      });
-      console.log('ID :'+i+' Document Exist ?', doc_exist)
-
-      if (doc_exist === false) {
-        // console.log(this.data.data[i].PassengerId);
-        // console.log(this.data.data[i].Survived);
-        // console.log(this.data.data[i].Pclass);
-        // https://fr.acervolima.com/comment-supprimer-un-caractere-d-une-string-en-javascript/
-        // https://fr.acervolima.com/comment-supprimer-tous-les-sauts-de-ligne-d-une-string-a-l-aide-de-javascript/
-        // console.log('FirstName: ',this.data.data[i].FirstName);
-        // console.log('Name :',this.data.data[i].Name);
-        // console.log('Sexe : ',this.data.data[i].Sex);
-        // console.log('Age : ',this.data.data[i].Age);
-        // console.log(this.data.data[i].SibSp);
-        // console.log(this.data.data[i].Parch);
-        // console.log(this.data.data[i].Ticket);
-        // console.log('Fare: ',this.data.data[i].Fare);
-        // console.log('Cabine: ',this.data.data[i].Cabin);
-        // console.log('Embarked: ',this.data.data[i].Embarked);
-
-
-        await setDoc(doc(db, "train_passengers", this.dS.generateDocId(20)), {
-          id: this.data.data[i].PassengerId,
-          Survived: this.data.data[i].Survived,
-          Pclass: this.data.data[i].Pclass,
-          FirstName: this.data.data[i].FirstName,
-          Name: this.data.data[i].Name,
-          Sex: this.data.data[i].Sex,
-          Age: this.data.data[i].Age,
-          SibSp: this.data.data[i].SibSp,
-          Parch: this.data.data[i].Parch,
-          Ticket: this.data.data[i].Ticket,
-          Fare: this.data.data[i].Fare,
-          Cabin: this.data.data[i].Cabin,
-          Embarked: this.data.data[i].Embarked
-        });
-      } else {
-        continue;
-
-      }
+    // Instanciation of retourned Data
+    let datas_returned:any = {
+      pushed: [],
+      not_pushed: [],
+      error: '',
     }
+    // Getting all passenger in Database Firestore
+    let DB_passenger = this.getPassengersInDB();
+    DB_passenger.then((element)=>{
+
+      for(let y = 0; y < 10; y++){
+
+        const occurence = element.find((elt: any) => elt.id == this.data.data[y].PassengerId);
+        console.log(occurence);
+
+        if (!occurence){
+          datas_returned.pushed.push(this.data.data[y]);
+          this.pushDataPassenger(y);
+        } else {
+          datas_returned.not_pushed.push(this.data.data[y]);
+
+        }
+      }
+
+    })
+    .catch(() => {
+      datas_returned.error = 'Error DB01: Probleme de recuperation des donnees dans la base Firestore';
+    })
+    .finally(()=> {
+      return datas_returned;
+    });
+
+
   }
   static() {
     for (let i = 0; i < docsGetted.length; i++) {

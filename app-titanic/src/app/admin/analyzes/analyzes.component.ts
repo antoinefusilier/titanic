@@ -13,12 +13,18 @@ import { FirebaseService, docsGetted, docsId, docsConfirm } from '../../services
 // https://angular.io/api/forms/NgModel
 // https://www.learn-angular.fr/le-data-binding-angular/
 
+
+
+
+
 @Component({
   selector: 'app-analyzes',
   templateUrl: './analyzes.component.html',
   styleUrls: ['./analyzes.component.scss'],
 })
 export class AnalyzesComponent implements OnInit {
+
+
 
   request: any = {
     sex: 'all',
@@ -35,6 +41,8 @@ export class AnalyzesComponent implements OnInit {
     console.log(docsId);
     console.log(docsGetted);
   }
+
+
 
   ngOnInit(): void {
 
