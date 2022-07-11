@@ -17,6 +17,8 @@ export class ResultComponent implements OnInit {
   // sur: number = survived.length;
   // Default value debugging into firebase service constante of survived and not_survived
   // Can't refresh HTML before variables :/
+
+  // To it input/output or firebase function
   sur: number = 1;
   not_sur: number = 3;
 
@@ -49,6 +51,14 @@ export class ResultComponent implements OnInit {
     this.loading();
     this.sur = survived.length;
     this.not_sur = not_survived.length;
+    console.log('survivant apres init ',this.sur);
+    console.log('non survivant apres init',this.not_sur);
+    console.log('non survivant apres init', survived.length);
+    console.log('non survivant apres init', not_survived.length);
+
+
+
+
 
   }
   async loading(){
