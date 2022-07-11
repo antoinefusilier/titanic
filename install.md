@@ -1,3 +1,3 @@
-# How give and install this projet
+# How get and install this projet
 
 in comming 
