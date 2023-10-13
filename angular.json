@@ -109,5 +109,8 @@
       }
     }
   },
-  "defaultProject": "app-titanic"
+  "defaultProject": "app-titanic",
+  "cli": {
+    "analytics": "bf5621c7-0b88-4cbc-a43b-af0f28e74e64"
+  }
 }
